@@ -4,9 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.jonasthuresson.onealarmclock.model.alarms.Alarm
+import javax.inject.Inject
 
-class AlarmsViewModel(private val repo: AlarmsRepo) : ViewModel() {
-    private var _alarms: MutableLiveData<ArrayList<Alarm>> = MutableLiveData()
-    val alarms: LiveData<ArrayList<Alarm>>
+class AlarmsViewModel : ViewModel() {
+    private var repo: AlarmsRepo = AlarmsRepo()
+
+    private var _alarms: MutableLiveData<Array<Alarm>> = MutableLiveData()
+    val alarms: LiveData<Array<Alarm>>
         get() = _alarms
+
+    fun fetchAlarms() {
+        _alarms.value = repo.getAlarms()
+    }
+
 }

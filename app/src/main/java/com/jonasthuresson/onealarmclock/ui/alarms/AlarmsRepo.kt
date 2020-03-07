@@ -8,8 +8,8 @@ import javax.inject.Singleton
 
 @Singleton
 class AlarmsRepo @Inject constructor() {
-    fun getAlarms() : List<Alarm>{
-        return listOf(Alarm(LocalDateTime.now().plusHours(1)), Alarm(LocalDateTime.now().plusDays(2)))
+    fun getAlarms() : Array<Alarm>{
+        return arrayOf(Alarm(LocalDateTime.now().plusHours(1)), Alarm(LocalDateTime.now().plusDays(2)))
     }
 }
 
