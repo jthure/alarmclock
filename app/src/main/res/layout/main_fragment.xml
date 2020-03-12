@@ -5,25 +5,28 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.alarms.AlarmsMainFragment">
+    tools:context=".android.ui.alarms.AlarmsMainFragment">
 
-    <TextView
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_alarms"
+        android:name="com.jonasthuresson.onealarmclock.ui.alarms.AlarmsMainFragment"
+        app:layout_constraintBottom_toBottomOf="@id/button_new_alarm"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+    </androidx.fragment.app.FragmentContainerView>
+    <Button
+        android:id="@+id/button_new_alarm"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="MainFragment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Test!!!"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Add +"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

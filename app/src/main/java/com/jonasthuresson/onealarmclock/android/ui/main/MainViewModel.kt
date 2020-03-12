@@ -1,4 +1,4 @@
-package com.jonasthuresson.onealarmclock.ui.main
+package com.jonasthuresson.onealarmclock.android.ui.main
 
 import androidx.lifecycle.ViewModel
 

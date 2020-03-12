@@ -1,10 +1,8 @@
-package com.jonasthuresson.onealarmclock.ui.alarms
+package com.jonasthuresson.onealarmclock.android.ui.alarms
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.jonasthuresson.onealarmclock.R
 import com.jonasthuresson.onealarmclock.model.alarms.Alarm
 
 class AlarmsAdapter () :
@@ -22,7 +20,9 @@ class AlarmsAdapter () :
     override fun onCreateViewHolder(parent: ViewGroup,
                                     viewType: Int): AlarmsAdapter.MyViewHolder {
         // create a new view
+        //val params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         val textView = TextView(parent.context)
+        //textView.layoutParams = params
         // set the view's size, margins, paddings and layout parameters
         return MyViewHolder(textView)
     }

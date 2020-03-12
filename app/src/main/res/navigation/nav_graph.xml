@@ -7,7 +7,19 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.jonasthuresson.onealarmclock.ui.alarms.AlarmsMainFragment"
-        android:label="main_fragment"
-        tools:layout="@layout/main_fragment" />
+        android:name="com.jonasthuresson.onealarmclock.android.ui.main.MainFragment"
+        android:label="main_fragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_addAlarmFragment"
+            app:destination="@id/addAlarmFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAlarmFragment"
+        android:name="com.jonasthuresson.onealarmclock.android.ui.addalarm.AddAlarmFragment"
+        android:label="fragment_add_alarm"
+        tools:layout="@layout/fragment_add_alarm" >
+        <action
+            android:id="@+id/action_addAlarmFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>
