@@ -3,15 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/alarmsFragment">
 
     <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.jonasthuresson.onealarmclock.android.ui.main.MainFragment"
-        android:label="main_fragment" >
+        android:id="@+id/alarmsFragment"
+        android:name="com.jonasthuresson.onealarmclock.android.ui.alarms.AlarmsFragment"
+        android:label="alarms_fragment"
+        tools:layout="@layout/main_fragment">
         <action
             android:id="@+id/action_mainFragment_to_addAlarmFragment"
             app:destination="@id/addAlarmFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_triggeredAlarm"
+            app:destination="@id/triggeredAlarm" />
     </fragment>
     <fragment
         android:id="@+id/addAlarmFragment"
@@ -20,6 +24,15 @@
         tools:layout="@layout/fragment_add_alarm" >
         <action
             android:id="@+id/action_addAlarmFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/alarmsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/triggeredAlarm"
+        android:name="com.jonasthuresson.onealarmclock.android.ui.triggeredalarm.TriggeredAlarm"
+        android:label="triggered_alarm_fragment"
+        tools:layout="@layout/triggered_alarm_fragment" >
+        <argument
+            android:name="alarmId"
+            app:argType="long" />
     </fragment>
 </navigation>

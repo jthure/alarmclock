@@ -5,11 +5,11 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".android.ui.alarms.AlarmsMainFragment">
+    tools:context=".android.ui.alarms.AlarmsFragment">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_alarms"
-        android:name="com.jonasthuresson.onealarmclock.ui.alarms.AlarmsMainFragment"
+        android:name="com.jonasthuresson.onealarmclock.android.ui.alarms.AlarmsFragment"
         app:layout_constraintBottom_toBottomOf="@id/button_new_alarm"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -11,12 +11,12 @@
         android:id="@+id/time_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
     </TimePicker>
+
     <Button
         android:id="@+id/button_save"
         android:layout_width="match_parent"
@@ -26,4 +26,35 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="Save"
         />
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/repeat_button_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/time_picker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/repeat_button_monday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mon"
+            style="?attr/materialButtonOutlinedStyle"
+            />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/repeat_button_tuesday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tue"
+            style="?attr/materialButtonOutlinedStyle"
+            />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/repeat_button_wednesday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wed"
+            style="?attr/materialButtonOutlinedStyle"
+            />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>

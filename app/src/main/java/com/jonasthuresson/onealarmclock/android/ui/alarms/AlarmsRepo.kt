@@ -1,15 +1,21 @@
 package com.jonasthuresson.onealarmclock.android.ui.alarms
 
-import com.jonasthuresson.onealarmclock.model.alarms.Alarm
+import androidx.lifecycle.LiveData
+import com.jonasthuresson.onealarmclock.android.OneAlarmApplication
+import com.jonasthuresson.onealarmclock.db.Alarm
+import com.jonasthuresson.onealarmclock.db.AlarmDao
+import com.jonasthuresson.onealarmclock.db.AppDatabase
+import com.jonasthuresson.onealarmclock.di.DaggerApplicationComponent
+import dagger.android.DaggerApplication
+import java.time.LocalTime
+import javax.inject.Inject
 
 
-class AlarmsRepo () {
-    private var alarms: Array<Alarm> = emptyArray()
+class AlarmsRepo @Inject constructor(private val alarmDao: AlarmDao) {
 
-    fun getAlarms() : Array<Alarm>{
-        return alarms
-    }
-    fun addAlarm(alarm: Alarm){
-        alarms += alarm
-    }
+    suspend fun getAlarms(): List<Alarm> = alarmDao.getAll()
+    suspend fun getAlarmById(id: Long): Alarm? = alarmDao.loadAllByIds(longArrayOf(id)).firstOrNull()
+
+    suspend fun addAlarm(alarm: Alarm): Alarm = alarm.copy(id = alarmDao.insert(alarm))
+
 }
