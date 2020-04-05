@@ -10,4 +10,8 @@ annotation class ApplicationContext
 
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
+annotation class ActivityContext
+
+@Qualifier
+@Retention(RetentionPolicy.RUNTIME)
 annotation class DatabaseInfo

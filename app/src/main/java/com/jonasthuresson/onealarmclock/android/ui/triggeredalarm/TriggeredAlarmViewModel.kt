@@ -20,4 +20,8 @@ class TriggeredAlarmViewModel @Inject constructor(private val alarmsRepo: Alarms
             _triggeredAlarm.value = alarm
         }
     }
+
+    fun snooze(){
+
+    }
 }

@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_addAlarmFragment_to_mainFragment"
             app:destination="@id/alarmsFragment" />
+        <action
+            android:id="@+id/action_addAlarmFragment_to_spotifySoundSourceFragment"
+            app:destination="@id/spotifySoundSourceFragment" />
     </fragment>
     <fragment
         android:id="@+id/triggeredAlarm"
@@ -35,4 +38,9 @@
             android:name="alarmId"
             app:argType="long" />
     </fragment>
+    <fragment
+        android:id="@+id/spotifySoundSourceFragment"
+        android:name="com.jonasthuresson.onealarmclock.android.ui.addalarm.soundsources.SpotifySoundSourceFragment"
+        android:label="spotify_sound_source_fragment"
+        tools:layout="@layout/spotify_sound_source_fragment" />
 </navigation>

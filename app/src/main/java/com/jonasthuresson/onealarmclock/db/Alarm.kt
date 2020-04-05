@@ -10,13 +10,19 @@ data class Alarm(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val time: LocalTime,
-    val repeats: Int = 0
+    val repeats: Int = 0,
+    val snoozeDurationInSeconds: Int = 0
 ) {
+    companion object{
+        fun snoozeDurationMinutesToSeconds(minutes: Int) = minutes * 60
+    }
     fun isRepeating() = repeats or 0
     fun setDay(day: DAYS, boolean: Boolean): Alarm =
         copy(repeats = (if (boolean) repeats or day.value else repeats and day.value.inv()))
     fun isDaySetToRepeat(day: DAYS) = repeats and day.value != 0
-
+    fun setSnoozeDurationInSeconds(seconds: Int): Alarm = copy(snoozeDurationInSeconds = seconds)
+    fun setSnoozeDurationInMinutes(minutes: Int): Alarm = setSnoozeDurationInSeconds(Alarm.snoozeDurationMinutesToSeconds(minutes))
+    fun getSnoozeDurationInMinutes() = snoozeDurationInSeconds / 60
 }
 
 enum class DAYS(val value: Int) {

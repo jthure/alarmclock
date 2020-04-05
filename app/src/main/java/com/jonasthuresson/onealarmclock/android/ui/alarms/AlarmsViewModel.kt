@@ -13,8 +13,8 @@ import javax.inject.Inject
 
 class AlarmsViewModel @Inject constructor(
     private val repo: AlarmsRepo,
-    private val alarmManager: SystemAlarmManager,
-    val spotifyManagerLiveData: LiveData<SpotifyManager>
+    private val alarmManager: SystemAlarmManager
+//    val spotifyManagerLiveData: LiveData<SpotifyManager>
 ) : ViewModel() {
     //private var repo: AlarmsRepo = AlarmsRepo()
 

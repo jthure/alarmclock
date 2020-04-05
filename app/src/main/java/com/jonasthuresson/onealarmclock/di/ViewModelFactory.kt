@@ -3,6 +3,7 @@ package com.jonasthuresson.onealarmclock.di
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.jonasthuresson.onealarmclock.android.ui.addalarm.AddAlarmViewModel
+import com.jonasthuresson.onealarmclock.android.ui.addalarm.soundsources.SpotifySoundSourceViewModel
 import com.jonasthuresson.onealarmclock.android.ui.alarms.AlarmsViewModel
 import com.jonasthuresson.onealarmclock.android.ui.triggeredalarm.TriggeredAlarmViewModel
 import dagger.Binds
@@ -45,6 +46,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AddAlarmViewModel::class)
     internal abstract fun addAlarmViewModel(viewModel: AddAlarmViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SpotifySoundSourceViewModel::class)
+    internal abstract fun addSpotifySoundSourceViewModel(viewModel: SpotifySoundSourceViewModel): ViewModel
 
     //Add more ViewModels here
 }

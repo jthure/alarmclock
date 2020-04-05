@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
@@ -29,29 +30,41 @@ class AddAlarmFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = getViewModel(AddAlarmViewModel::class.java)
-        time_picker.hour = viewModel.existingAlarm.time.hour
-        time_picker.minute = viewModel.existingAlarm.time.minute
-        repeat_button_monday.isChecked = viewModel.existingAlarm.isDaySetToRepeat(DAYS.MONDAY)
-        repeat_button_tuesday.isChecked = viewModel.existingAlarm.isDaySetToRepeat(DAYS.TUESDAY)
-        repeat_button_wednesday.isChecked = viewModel.existingAlarm.isDaySetToRepeat(DAYS.WEDNESDAY)
+        viewModel.existingAlarm.value?.let { alarm ->
+            time_picker.hour = alarm.time.hour
+            time_picker.minute = alarm.time.minute
+            repeat_button_monday.isChecked = alarm.isDaySetToRepeat(DAYS.MONDAY)
+            repeat_button_tuesday.isChecked = alarm.isDaySetToRepeat(DAYS.TUESDAY)
+            repeat_button_wednesday.isChecked = alarm.isDaySetToRepeat(DAYS.WEDNESDAY)
+            snooze_text_view.text = alarm.getSnoozeDurationInMinutes().toString()
+        }
+
 
         time_picker.setOnTimeChangedListener { view, hourOfDay, minute ->
-            viewModel.existingAlarm =
-                viewModel.existingAlarm.copy(time = LocalTime.of(hourOfDay, minute))
+            viewModel.setAlarmTime(hourOfDay, minute)
         }
         repeat_button_group.addOnButtonCheckedListener { group, checkedId, isChecked ->
-            viewModel.existingAlarm = when(checkedId){
-                R.id.repeat_button_monday -> viewModel.existingAlarm.setDay(DAYS.MONDAY, isChecked)
-                R.id.repeat_button_tuesday -> viewModel.existingAlarm.setDay(DAYS.TUESDAY, isChecked)
-                R.id.repeat_button_wednesday -> viewModel.existingAlarm.setDay(DAYS.WEDNESDAY, isChecked)
-                else -> viewModel.existingAlarm
+            val day = when (checkedId) {
+                R.id.repeat_button_monday -> DAYS.MONDAY
+                R.id.repeat_button_tuesday -> DAYS.TUESDAY
+                R.id.repeat_button_wednesday -> DAYS.WEDNESDAY
+                else -> null
             }
+            day?.let { viewModel.setAlarmDay(day, isChecked) }
         }
+        plus_button.setOnClickListener { viewModel.increaseSnooze() }
+        minus_button.setOnClickListener { viewModel.decreaseSnooze() }
+        viewModel.existingAlarm.observe(viewLifecycleOwner, Observer { alarm ->
+            snooze_text_view.text = alarm.getSnoozeDurationInMinutes().toString()
+        })
+        sound_source_selector.setAdapter(SoundSourceAdapter(context!!,
+            listOf(SoundSource("Spotify", AddAlarmFragmentDirections.actionAddAlarmFragmentToSpotifySoundSourceFragment())),
+            R.layout.sound_source_list_item_view, findNavController()))
         button_save.setOnClickListener {
-
-            viewModel.saveAlarm(viewModel.existingAlarm)
+            viewModel.saveAlarm()
             findNavController().navigate(AddAlarmFragmentDirections.actionAddAlarmFragmentToMainFragment())
         }
     }
+
     override fun layout() = R.layout.fragment_add_alarm
 }

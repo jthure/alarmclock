@@ -7,8 +7,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.jonasthuresson.onealarmclock.R
-import com.jonasthuresson.onealarmclock.android.services.BaseSoundService
-import com.jonasthuresson.onealarmclock.android.services.SoundService
+import com.jonasthuresson.onealarmclock.android.services.BaseAlarmService
+import com.jonasthuresson.onealarmclock.android.services.SpotifyAlarmService
 import com.jonasthuresson.onealarmclock.android.ui.BaseFragment
 import kotlinx.android.synthetic.main.triggered_alarm_fragment.*
 
@@ -37,7 +37,7 @@ class TriggeredAlarm() : BaseFragment() {
 
     private fun setupDismissAlarmButton(){
         dismiss_alarm_button.setOnClickListener(){
-            val i = Intent(BaseSoundService.ACTION_ALARM_STOP, null, context, SoundService::class.java)
+            val i = Intent(BaseAlarmService.ACTION_ALARM_STOP, null, context, SpotifyAlarmService::class.java)
             context?.stopService(i)
             findNavController().popBackStack()
         }

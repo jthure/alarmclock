@@ -6,9 +6,11 @@ import com.itshaven.testapp.test_room.di.ApplicationContext
 import com.itshaven.testapp.test_room.di.DatabaseInfo
 import com.jonasthuresson.onealarmclock.MainActivity
 import com.jonasthuresson.onealarmclock.android.OneAlarmApplication
-import com.jonasthuresson.onealarmclock.android.services.BaseSoundService
+import com.jonasthuresson.onealarmclock.android.services.BaseAlarmService
+import com.jonasthuresson.onealarmclock.android.services.SpotifyAlarmService
 import com.jonasthuresson.onealarmclock.android.ui.BaseFragment
 import com.jonasthuresson.onealarmclock.android.ui.addalarm.AddAlarmFragment
+import com.jonasthuresson.onealarmclock.android.ui.addalarm.soundsources.SpotifySoundSourceFragment
 import com.jonasthuresson.onealarmclock.android.ui.alarms.AlarmsFragment
 import com.jonasthuresson.onealarmclock.android.ui.alarms.AlarmsRepo
 import com.jonasthuresson.onealarmclock.android.ui.triggeredalarm.TriggeredAlarm
@@ -17,7 +19,7 @@ import javax.inject.Singleton
 
 
 @Singleton
-@Component(modules = [ApplicationModule::class, DatabaseModule::class, ViewModelModule::class, SystemAlarmManagerModule::class, SpotifyManagerModule::class])
+@Component(modules = [ApplicationModule::class, DatabaseModule::class, ViewModelModule::class, SystemAlarmManagerModule::class, SpotifyManagerModule::class, RetrofitModule::class])
 interface ApplicationComponent {
     fun inject(o: OneAlarmApplication?)
     fun inject(o: MainActivity?)
@@ -25,8 +27,10 @@ interface ApplicationComponent {
     fun inject(o: AlarmsFragment?)
     fun inject(o: AddAlarmFragment?)
     fun inject(o: TriggeredAlarm?)
+    fun inject(o: SpotifySoundSourceFragment?)
     fun inject(o: BaseFragment?)
-    fun inject(o: BaseSoundService?)
+    fun inject(o: BaseAlarmService?)
+    fun inject(o: SpotifyAlarmService?)
     @get:ApplicationContext
     val context: Context?
 

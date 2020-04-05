@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".android.OneAlarmApplication"
@@ -37,14 +38,17 @@
                     android:pathPattern="/spotify/auth" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.spotify"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <receiver
             android:name=".android.helpers.AlarmReceiver"
             android:enabled="true"
             android:exported="true" />
 
-        <service android:name=".android.services.SoundService" />
-        <service android:name=".android.services.SpotifySoundService" />
+        <service android:name=".android.services.SoundAlarmService" />
+        <service android:name=".android.services.SpotifyAlarmService" />
     </application>
 
 </manifest>
