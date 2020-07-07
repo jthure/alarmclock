@@ -2,25 +2,26 @@ package com.jonasthuresson.onealarmclock.di
 
 import android.app.Application
 import android.content.Context
-import com.itshaven.testapp.test_room.di.ApplicationContext
+import com.jonasthuresson.onealarmclock.android.MainActivity
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.android.AndroidInjector
+import dagger.multibindings.ClassKey
+import dagger.multibindings.IntoMap
 import javax.inject.Singleton
 
 
 @Module
-class ApplicationModule(private val mApplication: Application) {
+abstract class ApplicationModule() {
     @Singleton
-    @Provides
+    @Binds
     @ApplicationContext
-    fun provideContext(): Context {
-        return mApplication
-    }
+    abstract fun provideContext(application: Application): Context
 
     @Singleton
-    @Provides
-    fun provideApplication(): Application {
-        return mApplication
-    }
+    @Binds
+    abstract fun provideApplication(application: Application): Application
+
 
 }

@@ -1,5 +1,6 @@
 package com.jonasthuresson.onealarmclock.android.helpers
 
+import android.app.Activity
 import android.content.Context
 import android.util.Log
 import com.spotify.android.appremote.api.ConnectionParams
@@ -41,7 +42,7 @@ class SpotifyManager() {
         private const val CLIENT_ID = "7310d321ef974502973b1808e37bbc14"
         private const val REDIRECT_URI = "http://onealarmclock.jonasthuresson.com/spotify/auth"
 
-        fun newInstance(context: Context): SpotifyManager{
+        fun newInstance(context: Activity): SpotifyManager{
             val x = SpotifyManager()
             val y = CompletableDeferred<SpotifyAppRemote>()
             x.defferSpotifyAppRemote = y
@@ -69,7 +70,7 @@ class SpotifyManager() {
             builder.setScopes(arrayOf("streaming"))
             val request: AuthenticationRequest = builder.build()
 
-            //AuthenticationClient.openLoginActivity(this, 123, request)
+            AuthenticationClient.openLoginActivity(context, 123, request)
 
             return x
         }

@@ -8,7 +8,8 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class SpotifySoundSourceViewModel @Inject constructor(private val spotifyManager: SpotifyManager) : ViewModel() {
+//class SpotifySoundSourceViewModel@Inject constructor(private val spotifyManager: SpotifyManager) : ViewModel() {
+    class SpotifySoundSourceViewModel @Inject constructor(): ViewModel() {
     var searchText: String = ""
     set(value) {
         field = value
@@ -17,7 +18,7 @@ class SpotifySoundSourceViewModel @Inject constructor(private val spotifyManager
 
     private fun search(text: String){
         viewModelScope.launch {
-            spotifyManager.search()
+//            spotifyManager.search()
         }
     }
 }

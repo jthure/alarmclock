@@ -13,11 +13,12 @@ import com.jonasthuresson.onealarmclock.db.Alarm
 import com.spotify.android.appremote.api.ConnectionParams
 import com.spotify.android.appremote.api.Connector
 import com.spotify.android.appremote.api.SpotifyAppRemote
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.alarms_fragment.*
 import kotlinx.android.synthetic.main.main_fragment.button_new_alarm
 
 
-class AlarmsFragment : BaseFragment() {
+class AlarmsFragment : BaseFragment()  {
 
     private lateinit var viewModel: AlarmsViewModel
     private lateinit var alarmsAdapter: AlarmsAdapter

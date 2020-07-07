@@ -5,14 +5,16 @@ import android.content.Intent
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import androidx.lifecycle.*
-import com.jonasthuresson.onealarmclock.MainActivity
+import androidx.lifecycle.LifecycleService
+import androidx.lifecycle.lifecycleScope
 import com.jonasthuresson.onealarmclock.R
+import com.jonasthuresson.onealarmclock.android.MainActivity
 import com.jonasthuresson.onealarmclock.android.OneAlarmApplication
 import com.jonasthuresson.onealarmclock.android.helpers.AlarmReceiver
 import com.jonasthuresson.onealarmclock.android.helpers.SystemAlarmManager
 import com.jonasthuresson.onealarmclock.android.ui.alarms.AlarmsRepo
 import com.jonasthuresson.onealarmclock.db.Alarm
+import dagger.android.AndroidInjection
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,8 +30,9 @@ abstract class BaseAlarmService: LifecycleService() {
     lateinit var alarmsRepo: AlarmsRepo
 
     override fun onCreate() {
+        AndroidInjection.inject(this)
         super.onCreate()
-        (application as OneAlarmApplication).getComponent()?.inject(this)
+//        (application as OneAlarmApplication).getComponent()?.inject(this)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {

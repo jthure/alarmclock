@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".android.MainActivity"
             android:showWhenLocked="true"
             android:turnScreenOn="true">
             <tools:validation testUrl="http://onealarmclock.jonasthuresson.com/spotify/auth" />
@@ -38,9 +38,9 @@
                     android:pathPattern="/spotify/auth" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.spotify"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+<!--        <activity-->
+<!--            android:name="com.spotify."-->
+<!--            android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
 
         <receiver
             android:name=".android.helpers.AlarmReceiver"

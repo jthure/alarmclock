@@ -12,9 +12,9 @@ import com.jonasthuresson.onealarmclock.android.services.SpotifyAlarmService
 import com.jonasthuresson.onealarmclock.android.ui.BaseFragment
 import kotlinx.android.synthetic.main.triggered_alarm_fragment.*
 
-class TriggeredAlarm() : BaseFragment() {
+class TriggeredAlarmFragment() : BaseFragment() {
 
-    private val args: TriggeredAlarmArgs by navArgs()
+    private val args: TriggeredAlarmFragmentArgs by navArgs()
 
     private var mediaPlayer: MediaPlayer? = null
     private lateinit var viewModel: TriggeredAlarmViewModel

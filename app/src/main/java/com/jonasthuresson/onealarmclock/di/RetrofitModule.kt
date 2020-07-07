@@ -1,5 +1,6 @@
 package com.jonasthuresson.onealarmclock.di
 
+import android.app.Activity
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -12,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-class RetrofitModule {
+class RetrofitModule(context: Activity) {
     private val BASE_URL = "http://xyz/appname/"
 
     @Provides

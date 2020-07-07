@@ -9,16 +9,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import com.jonasthuresson.onealarmclock.android.OneAlarmApplication
+import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-abstract class BaseFragment() : Fragment() {
+abstract class BaseFragment() : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        (activity?.application as OneAlarmApplication).getComponent()?.inject(this)
+//        (activity?.application as OneAlarmApplication).getComponent()?.inject(this)
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

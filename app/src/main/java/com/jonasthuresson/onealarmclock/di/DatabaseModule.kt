@@ -2,8 +2,6 @@ package com.jonasthuresson.onealarmclock.di
 
 import android.content.Context
 import androidx.room.Room
-import com.itshaven.testapp.test_room.di.ApplicationContext
-import com.itshaven.testapp.test_room.di.DatabaseInfo
 import com.jonasthuresson.onealarmclock.db.AlarmDao
 import com.jonasthuresson.onealarmclock.db.AppDatabase
 import dagger.Module

@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/triggeredAlarm"
-        android:name="com.jonasthuresson.onealarmclock.android.ui.triggeredalarm.TriggeredAlarm"
+        android:name="com.jonasthuresson.onealarmclock.android.ui.triggeredalarm.TriggeredAlarmFragment"
         android:label="triggered_alarm_fragment"
         tools:layout="@layout/triggered_alarm_fragment" >
         <argument

@@ -4,13 +4,9 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import com.jonasthuresson.onealarmclock.MainActivity
+import com.jonasthuresson.onealarmclock.android.MainActivity
 import com.jonasthuresson.onealarmclock.db.Alarm
-import java.time.LocalDateTime
-import java.time.OffsetDateTime
-import java.time.ZoneOffset
 import java.util.*
-import javax.inject.Inject
 
 class SystemAlarmManager constructor(private val context: Context) {
 
