@@ -1,24 +1,57 @@
 package com.jonasthuresson.onealarmclock.android.ui.addalarm.soundsources
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.jonasthuresson.onealarmclock.android.helpers.SpotifyManager
-import kotlinx.coroutines.Deferred
+import androidx.lifecycle.*
+import com.jonasthuresson.onealarmclock.data.SpotifyRepo
+import com.jonasthuresson.onealarmclock.model.AlarmSound
+import com.jonasthuresson.onealarmclock.model.SpotifySound
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-//class SpotifySoundSourceViewModel@Inject constructor(private val spotifyManager: SpotifyManager) : ViewModel() {
-    class SpotifySoundSourceViewModel @Inject constructor(): ViewModel() {
-    var searchText: String = ""
-    set(value) {
-        field = value
-        search(value)
+class SpotifySoundSourceViewModel @Inject constructor(private val spotifyRepo: SpotifyRepo) :
+    ViewModel() {
+    init {
+        viewModelScope.launch { spotifyRepo.init() }
     }
 
-    private fun search(text: String){
+    var searchText: String = ""
+        set(value) {
+            field = value
+            if (value.isNotEmpty()) search(value)
+        }
+
+    private val _searchResult: MutableLiveData<List<AlarmSound>> = MutableLiveData()
+    val searchResult: LiveData<List<AlarmSound>>
+        get() = _searchResult
+
+
+//    private fun search2(text: String) {
+//        searchResult = liveData {
+//            spotifyRepo.search2(text)
+//                .collect {
+//                    emit(
+//                        it.tracks.items.map { item ->
+//                            AlarmSound(
+//                                item.name
+//                            )
+//
+//                        }
+//                    )
+//                }
+//        }
+//    }
+
+    private fun search(text: String) {
+
         viewModelScope.launch {
-//            spotifyManager.search()
+            val response = spotifyRepo.search(text)
+            _searchResult.value = response.tracks.items.map { item ->
+                SpotifySound(
+                    item.name,
+                    ""
+                )
+            }
+            val x = 3
         }
     }
 }

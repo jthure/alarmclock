@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jonasthuresson.onealarmclock.android.helpers.SystemAlarmManager
-import com.jonasthuresson.onealarmclock.android.ui.alarms.AlarmsRepo
-import com.jonasthuresson.onealarmclock.db.Alarm
-import com.jonasthuresson.onealarmclock.db.DAYS
+import com.jonasthuresson.onealarmclock.data.AlarmsRepo
+import com.jonasthuresson.onealarmclock.model.Alarm
+import com.jonasthuresson.onealarmclock.model.AlarmSound
 import kotlinx.coroutines.launch
 import java.time.LocalTime
 import javax.inject.Inject
@@ -44,13 +44,18 @@ class AddAlarmViewModel @Inject constructor(
         )
     }
 
-    fun setAlarmDay(days: DAYS, isRepeated: Boolean){
+    fun setAlarmDay(days: com.jonasthuresson.onealarmclock.model.Alarm.DAYS, isRepeated: Boolean) {
         _existingAlarm.value?.setDay(days, isRepeated)
+    }
+
+    fun setAlarmSound(sound: AlarmSound) {
+        _existingAlarm.value = _existingAlarm.value?.setSound(sound)
     }
 
     fun increaseSnooze() {
         _existingAlarm.value?.let { alarm -> setSnooze(alarm.snoozeDurationInSeconds + 60) }
     }
+
     fun decreaseSnooze() {
         _existingAlarm.value?.let { alarm -> setSnooze(alarm.snoozeDurationInSeconds - 60) }
     }
@@ -60,5 +65,6 @@ class AddAlarmViewModel @Inject constructor(
     }
 
     private fun alarmNow() = Alarm(time = LocalTime.now())
+
 }
 

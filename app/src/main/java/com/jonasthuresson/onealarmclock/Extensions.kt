@@ -1,9 +1,5 @@
 package com.jonasthuresson.onealarmclock
 
-import android.content.ContentResolver
-import android.content.Context
-import android.net.Uri
+fun String.toActivityResultCode() = hashCode().and(0xF0)
 
-fun Context.uriFromResourceId(id: Int): Uri {
-    return Uri.parse("${ContentResolver.SCHEME_ANDROID_RESOURCE}://${this.packageName}/${id}")
-}
+val Any.TAG: String get() = javaClass.simpleName

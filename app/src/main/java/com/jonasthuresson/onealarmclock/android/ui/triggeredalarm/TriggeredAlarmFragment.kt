@@ -12,7 +12,7 @@ import com.jonasthuresson.onealarmclock.android.services.SpotifyAlarmService
 import com.jonasthuresson.onealarmclock.android.ui.BaseFragment
 import kotlinx.android.synthetic.main.triggered_alarm_fragment.*
 
-class TriggeredAlarmFragment() : BaseFragment() {
+class TriggeredAlarmFragment : BaseFragment() {
 
     private val args: TriggeredAlarmFragmentArgs by navArgs()
 
@@ -22,7 +22,7 @@ class TriggeredAlarmFragment() : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = getViewModel(TriggeredAlarmViewModel::class.java)
-        viewModel.triggeredAlarm.observe(viewLifecycleOwner, Observer{alarm ->
+        viewModel.triggeredAlarm.observe(viewLifecycleOwner, Observer { alarm ->
             alarm_time_text_view.text = alarm.time.toString()
         })
         setupDismissAlarmButton()
@@ -35,13 +35,19 @@ class TriggeredAlarmFragment() : BaseFragment() {
         mediaPlayer = null
     }
 
-    private fun setupDismissAlarmButton(){
-        dismiss_alarm_button.setOnClickListener(){
-            val i = Intent(BaseAlarmService.ACTION_ALARM_STOP, null, context, SpotifyAlarmService::class.java)
+    private fun setupDismissAlarmButton() {
+        dismiss_alarm_button.setOnClickListener {
+            val i = Intent(
+                BaseAlarmService.ACTION_ALARM_STOP,
+                null,
+                context,
+                SpotifyAlarmService::class.java
+            )
             context?.stopService(i)
             findNavController().popBackStack()
         }
     }
+
     override fun layout(): Int = R.layout.triggered_alarm_fragment
 
 }

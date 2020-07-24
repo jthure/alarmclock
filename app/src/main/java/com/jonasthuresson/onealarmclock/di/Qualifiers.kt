@@ -7,7 +7,7 @@ import javax.inject.Scope
 
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
-annotation class    ApplicationContext
+annotation class ApplicationContext
 
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
@@ -19,4 +19,8 @@ annotation class DatabaseInfo
 
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
-annotation class PerActivity
+annotation class ActivityScope
+
+@Scope
+@Retention(RetentionPolicy.RUNTIME)
+annotation class FragmentScope

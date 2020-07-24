@@ -8,20 +8,19 @@ import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
 import com.jonasthuresson.onealarmclock.R
+import com.jonasthuresson.onealarmclock.TAG
 import com.jonasthuresson.onealarmclock.android.MainActivity
-import com.jonasthuresson.onealarmclock.android.OneAlarmApplication
 import com.jonasthuresson.onealarmclock.android.helpers.AlarmReceiver
 import com.jonasthuresson.onealarmclock.android.helpers.SystemAlarmManager
-import com.jonasthuresson.onealarmclock.android.ui.alarms.AlarmsRepo
-import com.jonasthuresson.onealarmclock.db.Alarm
+import com.jonasthuresson.onealarmclock.data.AlarmsRepo
+import com.jonasthuresson.onealarmclock.model.Alarm
 import dagger.android.AndroidInjection
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
-abstract class BaseAlarmService: LifecycleService() {
+abstract class BaseAlarmService : LifecycleService() {
     companion object {
-        val TAG = BaseAlarmService::class.simpleName
         const val ACTION_ALARM_START = "com.jonasthuresson.onealarmclock.action.alarm_start"
         const val ACTION_ALARM_STOP = "com.jonasthuresson.onealarmclock.action.alarm_stop"
     }
@@ -37,7 +36,7 @@ abstract class BaseAlarmService: LifecycleService() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val id = intent?.getLongExtra(SystemAlarmManager.EXTRA_ALARM_ID, -1)
-        if(id == null || id == -1L){
+        if (id == null || id == -1L) {
             Log.d(TAG, "Invalid id: $id in intent. Stopping service...")
             stopSelf()
             return Service.START_NOT_STICKY
@@ -51,7 +50,7 @@ abstract class BaseAlarmService: LifecycleService() {
         }
 
         // service will not be recreated if abnormally terminated
-        return super.onStartCommand(intent, flags, startId);
+        return super.onStartCommand(intent, flags, startId)
     }
 
     override fun onDestroy() {
@@ -59,14 +58,14 @@ abstract class BaseAlarmService: LifecycleService() {
         stopSound()
     }
 
-    private fun handleAction(action: String?){
+    private fun handleAction(action: String?) {
         when (action) {
             ACTION_ALARM_START -> startSound()
             ACTION_ALARM_STOP -> stopSound()
         }
     }
 
-    private fun buildNotification (alarm: Alarm): Notification{
+    private fun buildNotification(alarm: Alarm): Notification {
         val i = Intent(MainActivity.ACTION_ALARM, null, this, MainActivity::class.java)
         i.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         i.putExtra(SystemAlarmManager.EXTRA_ALARM_ID, alarm.id)
@@ -101,9 +100,9 @@ abstract class BaseAlarmService: LifecycleService() {
                 channel
             )
         }
-        return  builder.build()
+        return builder.build()
     }
 
     protected abstract fun startSound()
-    protected abstract  fun stopSound()
+    protected abstract fun stopSound()
 }

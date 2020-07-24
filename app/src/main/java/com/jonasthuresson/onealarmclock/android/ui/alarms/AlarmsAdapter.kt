@@ -1,13 +1,11 @@
 package com.jonasthuresson.onealarmclock.android.ui.alarms
 
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.jonasthuresson.onealarmclock.db.Alarm
+import com.jonasthuresson.onealarmclock.model.Alarm
 
 
-class AlarmsAdapter (private val onItemClickAction: (Alarm)->Unit) :
+class AlarmsAdapter(private val onItemClickAction: (Alarm) -> Unit) :
     RecyclerView.Adapter<AlarmsAdapter.MyViewHolder>() {
     private var _myDataset: List<Alarm> = listOf()
 
@@ -19,18 +17,18 @@ class AlarmsAdapter (private val onItemClickAction: (Alarm)->Unit) :
 
 
     // Create new views (invoked by the layout manager)
-    override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): AlarmsAdapter.MyViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): AlarmsAdapter.MyViewHolder {
         val itemView = AlarmListItemView(parent.context)
         // manually set the CustomView's size
         // manually set the CustomView's size
-        itemView.setLayoutParams(
-            ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
+        itemView.layoutParams = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
         )
-        itemView.setOnClickListener(){
+        itemView.setOnClickListener {
             onItemClickAction((it as AlarmListItemView).alarm)
         }
         return MyViewHolder(itemView)

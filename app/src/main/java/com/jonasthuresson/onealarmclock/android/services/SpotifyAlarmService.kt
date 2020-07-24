@@ -1,19 +1,14 @@
 package com.jonasthuresson.onealarmclock.android.services
 
-import android.media.MediaPlayer
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import com.jonasthuresson.onealarmclock.android.OneAlarmApplication
-import com.jonasthuresson.onealarmclock.android.helpers.SpotifyManager
+import com.jonasthuresson.onealarmclock.data.SpotifyRepo
 import dagger.android.AndroidInjection
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
-class SpotifyAlarmService : BaseAlarmService() {
+class SpotifyAlarmService @Inject constructor(private val spotifyRepo: SpotifyRepo) : BaseAlarmService() {
 
 //    @Inject
 //    lateinit var spotifyManager: SpotifyManager

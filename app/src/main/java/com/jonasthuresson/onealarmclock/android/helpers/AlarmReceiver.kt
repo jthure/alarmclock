@@ -58,7 +58,12 @@ class AlarmReceiver : BroadcastReceiver() {
 
 
         val serviceIntent: Intent =
-            Intent(BaseAlarmService.ACTION_ALARM_START, null, context, SpotifyAlarmService::class.java)
+            Intent(
+                BaseAlarmService.ACTION_ALARM_START,
+                null,
+                context,
+                SpotifyAlarmService::class.java
+            )
         serviceIntent.putExtra(SystemAlarmManager.EXTRA_ALARM_ID, id)
         context?.startForegroundService(serviceIntent)
     }

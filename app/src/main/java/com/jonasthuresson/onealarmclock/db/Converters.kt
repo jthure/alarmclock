@@ -6,7 +6,7 @@ import java.time.LocalTime
 class Converters {
     @TypeConverter
     fun fromTimestamp(value: String?): LocalTime? {
-        if(value == null) return  null
+        if (value == null) return null
         val split = value.split(":")
         val hour = split[0].toInt()
         val minute = split[1].toInt()

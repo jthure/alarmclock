@@ -5,12 +5,13 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import com.jonasthuresson.onealarmclock.android.MainActivity
-import com.jonasthuresson.onealarmclock.db.Alarm
+import com.jonasthuresson.onealarmclock.model.Alarm
 import java.util.*
+import javax.inject.Inject
 
-class SystemAlarmManager constructor(private val context: Context) {
+class SystemAlarmManager @Inject constructor(private val context: Context) {
 
-    companion object{
+    companion object {
         const val EXTRA_ALARM_ID = "com.jonasthuresson.onealarmclock.extra.alarmid"
     }
 
@@ -25,7 +26,12 @@ class SystemAlarmManager constructor(private val context: Context) {
         c.set(Calendar.SECOND, alarm.time.second)
 
         val alarmInfoPendingIntent =
-            PendingIntent.getActivity(context, alarm.id.toInt(), Intent(context, MainActivity::class.java), 0)
+            PendingIntent.getActivity(
+                context,
+                alarm.id.toInt(),
+                Intent(context, MainActivity::class.java),
+                0
+            )
 
         val alarmInfo = AlarmManager.AlarmClockInfo(c.timeInMillis, alarmInfoPendingIntent)
 

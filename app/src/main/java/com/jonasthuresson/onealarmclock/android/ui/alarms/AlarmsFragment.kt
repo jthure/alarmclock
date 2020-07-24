@@ -1,7 +1,6 @@
 package com.jonasthuresson.onealarmclock.android.ui.alarms
 
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,16 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jonasthuresson.onealarmclock.R
 import com.jonasthuresson.onealarmclock.android.ui.BaseFragment
 import com.jonasthuresson.onealarmclock.android.ui.addalarm.AddAlarmViewModel
-import com.jonasthuresson.onealarmclock.db.Alarm
-import com.spotify.android.appremote.api.ConnectionParams
-import com.spotify.android.appremote.api.Connector
-import com.spotify.android.appremote.api.SpotifyAppRemote
-import dagger.android.support.DaggerFragment
+import com.jonasthuresson.onealarmclock.model.Alarm
 import kotlinx.android.synthetic.main.alarms_fragment.*
 import kotlinx.android.synthetic.main.main_fragment.button_new_alarm
 
 
-class AlarmsFragment : BaseFragment()  {
+class AlarmsFragment : BaseFragment() {
 
     private lateinit var viewModel: AlarmsViewModel
     private lateinit var alarmsAdapter: AlarmsAdapter
@@ -47,6 +42,7 @@ class AlarmsFragment : BaseFragment()  {
         addAlarmViewModel.updateAlarm(alarm)
         findNavController().navigate(AlarmsFragmentDirections.actionMainFragmentToAddAlarmFragment())
     }
+
     private fun setupAddAlarmButton() {
         button_new_alarm.setOnClickListener {
             addAlarmViewModel.resetAlarm()

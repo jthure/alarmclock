@@ -12,9 +12,11 @@ import kotlinx.android.synthetic.main.main_activity.*
 
 class MainActivity : DaggerAppCompatActivity() {
 
-    companion object{
+    companion object {
         const val ACTION_ALARM = "com.jonasthuresson.onealarmclock.actions.alarm"
     }
+
+    private val activityResultObservers: MutableList<ActivityResultObserver> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,9 +31,29 @@ class MainActivity : DaggerAppCompatActivity() {
     }
 
     private fun handleIntent(intent: Intent?) {
-        if(intent?.action == ACTION_ALARM){
-            val id = intent?.getLongExtra(SystemAlarmManager.EXTRA_ALARM_ID, -1)
-            nav_host_fragment.findNavController().navigate(AlarmsFragmentDirections.actionMainFragmentToTriggeredAlarm(id))
+        if (intent?.action == ACTION_ALARM) {
+            val id = intent.getLongExtra(SystemAlarmManager.EXTRA_ALARM_ID, -1)
+            nav_host_fragment.findNavController()
+                .navigate(AlarmsFragmentDirections.actionMainFragmentToTriggeredAlarm(id))
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        activityResultObservers.forEach { observer ->
+            observer.onActivityResult(
+                requestCode,
+                resultCode,
+                data
+            )
+        }
+    }
+
+    fun addActivityResultObserver(observer: ActivityResultObserver) =
+        activityResultObservers.add(observer)
+
+
+    interface ActivityResultObserver {
+        fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
     }
 }
